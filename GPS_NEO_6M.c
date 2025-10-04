@@ -61,47 +61,5 @@ GPGGA_Status GPS_GPGGA_Data(GPGGA_Data *gpgga_data){
 	 }
 	 return GPGGA_FAIL;
 }
-/*
-GPRMC_Status GPS_GPRMC_Data(GPRMC_Data *gprmc_data){
-	static uint8_t gps_buffer[BUFFER_SIZE];
-	static uint8_t indx = 0;
-	uint8_t data;
 
-	 if(HAL_UART_Receive(&huart1, &data, 1, 100) == HAL_OK) {
-		 	gps_buffer[indx++] = data;
 
-		    if (data == '\n') {
- 	           gps_buffer[indx] = '\0';
- 	           indx = 0;
-
- 	           if(strncmp("$GPRMC", gps_buffer, 6) == 0){
- 		           const char *token = strtok(gps_buffer, ",");
- 	        	   int field = 0;
-
-		 	       while(token != NULL){
-		 	       	   switch(field){
-		 	       	   case 1 : strncpy(gprmc_data-> utc_time, token, 10); break;
-		 	       	   case 2 : gprmc_data->status = token[0]; break;
-		 	       	   case 3 : gprmc_data->latitude = atof(token); break;
-		 	       	   case 4 : gprmc_data->latitude_dir = token[0]; break;
-		 	       	   case 5 : gprmc_data->longitude = atof(token); break;
-		 	       	   case 6 : gprmc_data->longitude_dir = token[0]; break;
-		         	   case 7 : gprmc_data->speed_knots = atof(token); break;
-		        	   case 8 : gprmc_data->track_angle = atof(token); break;
-	 	        	   case 9 : strncpy(gprmc_data-> date, token, 6); break;
-	 	        	   case 10 :gprmc_data->magnetic_variation = atof(token); break;
-		 	           case 11 :gprmc_data->magnetic_variation_dir = token[0]; break;
-		 	       	   case 12 :gprmc_data->checksum = token[0]; break;
-		 	    	   }
-		 	        field++;
-		 	     	token = strtok(NULL,",");
-
-		 	        }
-		 	        field = 0;
-		 	     }
-	        }
-		    return GPRMC_SUCCESS;
-	 }
-	 return GPRMC_FAIL;
-}
-*/
